@@ -49,8 +49,10 @@ const Barcode = ({
 
   const update = () => {
     const encoder = barcodes[format];
-    const encoded = encode(value, encoder, props);
-
+    let encoded = encode(value, encoder, props);
+    if(format.substr(0, "EAN".length) === "EAN"){
+      encoded = encoded.reduce((p, n) => ({ data: `${p.data}${n.data || ''}`, text: `${p.text}${n.text || ''}` }), { data: '', text: ''})
+    }
     if (encoded) {
       setBars(drawSvgBarCode(encoded, props));
       setBarCodeWidth(encoded.data.length * width);

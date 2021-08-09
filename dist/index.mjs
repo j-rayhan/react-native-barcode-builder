@@ -73,6 +73,16 @@ var Barcode = function (ref) {
     var encoder = barcodes[format];
     var encoded = encode(value, encoder, props);
 
+    if (format.substr(0, "EAN".length) === "EAN") {
+      encoded = encoded.reduce(function (p, n) { return ({
+        data: ("" + (p.data) + (n.data || '')),
+        text: ("" + (p.text) + (n.text || ''))
+      }); }, {
+        data: '',
+        text: ''
+      });
+    }
+
     if (encoded) {
       setBars(drawSvgBarCode(encoded, props));
       setBarCodeWidth(encoded.data.length * width);

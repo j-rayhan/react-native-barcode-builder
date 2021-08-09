@@ -8,7 +8,8 @@ declare type props = {
     textColor: string;
     lineColor: string;
     background: string;
+    getRef?: (c: any) => any;
     onError?: (error: Error) => any;
 };
-declare const Barcode: ({ value, format, width, height, text, textColor, lineColor, background, onError, }: props) => JSX.Element;
+declare const Barcode: ({ value, format, width, height, text, textColor, lineColor, background, getRef, onError, }: props) => JSX.Element;
 export default Barcode;

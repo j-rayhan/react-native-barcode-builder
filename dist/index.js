@@ -50,6 +50,7 @@ var Barcode = function (ref) {
   var textColor = ref.textColor; if ( textColor === void 0 ) textColor = '#000000';
   var lineColor = ref.lineColor; if ( lineColor === void 0 ) lineColor = '#000000';
   var background = ref.background; if ( background === void 0 ) background = '#ffffff';
+  var getRef = ref.getRef;
   var onError = ref.onError;
 
   var ref$1 = React.useState([]);
@@ -67,6 +68,7 @@ var Barcode = function (ref) {
     textColor: textColor,
     lineColor: lineColor,
     background: background,
+    getRef: getRef,
     onError: onError
   };
   React.useEffect(function () {
@@ -174,7 +176,7 @@ var Barcode = function (ref) {
   };
   return React__default.createElement( ErrorBoundary, null,
       React__default.createElement( reactNative.View, { style: [styles.svgContainer, backgroundStyle] },
-        React__default.createElement( Svg__default, { height: height, width: barCodeWidth, fill: lineColor },
+        React__default.createElement( Svg__default, { ref: getRef, height: height, width: barCodeWidth, fill: lineColor },
           React__default.createElement( Svg.Path, { d: bars.join(' ') })
         ),
         typeof text !== 'undefined' && React__default.createElement( reactNative.Text, { style: {

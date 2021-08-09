@@ -46,6 +46,7 @@ var Barcode = function (ref) {
   var textColor = ref.textColor; if ( textColor === void 0 ) textColor = '#000000';
   var lineColor = ref.lineColor; if ( lineColor === void 0 ) lineColor = '#000000';
   var background = ref.background; if ( background === void 0 ) background = '#ffffff';
+  var getRef = ref.getRef;
   var onError = ref.onError;
 
   var ref$1 = useState([]);
@@ -63,6 +64,7 @@ var Barcode = function (ref) {
     textColor: textColor,
     lineColor: lineColor,
     background: background,
+    getRef: getRef,
     onError: onError
   };
   useEffect(function () {
@@ -170,7 +172,7 @@ var Barcode = function (ref) {
   };
   return React.createElement( ErrorBoundary, null,
       React.createElement( View, { style: [styles.svgContainer, backgroundStyle] },
-        React.createElement( Svg, { height: height, width: barCodeWidth, fill: lineColor },
+        React.createElement( Svg, { ref: getRef, height: height, width: barCodeWidth, fill: lineColor },
           React.createElement( Path, { d: bars.join(' ') })
         ),
         typeof text !== 'undefined' && React.createElement( Text, { style: {

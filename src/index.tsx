@@ -14,6 +14,8 @@ type props = {
   textColor: string;
   lineColor: string;
   background: string;
+  /* get svg ref for further usage */
+  getRef?: (c: any) => any;
   onError?: (error: Error) => any;
 };
 
@@ -26,6 +28,7 @@ const Barcode = ({
   textColor = '#000000',
   lineColor = '#000000',
   background = '#ffffff',
+  getRef,
   onError,
 }: props) => {
   const [bars, setBars] = useState([]);
@@ -40,6 +43,7 @@ const Barcode = ({
     textColor,
     lineColor,
     background,
+    getRef,
     onError,
   };
 
@@ -148,7 +152,7 @@ const Barcode = ({
   return (
     <ErrorBoundary>
       <View style={[styles.svgContainer, backgroundStyle]}>
-        <Svg height={height} width={barCodeWidth} fill={lineColor}>
+        <Svg ref={getRef} height={height} width={barCodeWidth} fill={lineColor}>
           <Path d={bars.join(' ')} />
         </Svg>
         {typeof text !== 'undefined' && (

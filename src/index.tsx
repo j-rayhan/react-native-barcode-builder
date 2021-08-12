@@ -14,6 +14,8 @@ type props = {
   textColor: string;
   lineColor: string;
   background: string;
+  /* get barcodeId for further usage */
+  getId?: (c: any) => any;
   /* get svg ref for further usage */
   getRef?: (c: any) => any;
   onError?: (error: Error) => any;
@@ -28,6 +30,7 @@ const Barcode = ({
   textColor = '#000000',
   lineColor = '#000000',
   background = '#ffffff',
+  getId,
   getRef,
   onError,
 }: props) => {
@@ -43,6 +46,7 @@ const Barcode = ({
     textColor,
     lineColor,
     background,
+    getId,
     getRef,
     onError,
   };
@@ -142,6 +146,9 @@ const Barcode = ({
     //  text: 'xxxxx',
     //  data: '110100100001....'
     // }
+    if(encoder.valid() && options.getId){
+      options.getId(encoder.text)
+    }
     const encoded = encoder.encode();
     return encoded;
   };

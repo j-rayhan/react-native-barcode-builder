@@ -50,6 +50,7 @@
     var textColor = ref.textColor; if ( textColor === void 0 ) textColor = '#000000';
     var lineColor = ref.lineColor; if ( lineColor === void 0 ) lineColor = '#000000';
     var background = ref.background; if ( background === void 0 ) background = '#ffffff';
+    var getId = ref.getId;
     var getRef = ref.getRef;
     var onError = ref.onError;
 
@@ -68,6 +69,7 @@
       textColor: textColor,
       lineColor: lineColor,
       background: background,
+      getId: getId,
       getRef: getRef,
       onError: onError
     };
@@ -166,6 +168,10 @@
       //  data: '110100100001....'
       // }
 
+
+      if (encoder.valid() && options.getId) {
+        options.getId(encoder.text);
+      }
 
       var encoded = encoder.encode();
       return encoded;
